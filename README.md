@@ -1,6 +1,6 @@
-# ✈️ Air Traffic Control (ATC) Simulation
+# Air Traffic Control (ATC) Simulation
 
-## 📌 Overview
+## Overview
 This project simulates an **Air Traffic Control (ATC)** system as a full-stack web application.  
 It showcases **core Operating System concepts** such as:
 - Scheduling (priority-based: Emergency > VIP > Normal)
@@ -12,7 +12,7 @@ The system manages flight operations (landing, taxiing, docking, departure) whil
 
 ---
 
-## 🚀 Features
+## Features
 - **Flight Management**: Add, edit, and delete flights
 - **Real-time Dashboard**: Live updates via WebSockets
 - **Priority Scheduling**: Emergency flights are handled first
@@ -23,7 +23,7 @@ The system manages flight operations (landing, taxiing, docking, departure) whil
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 ### Frontend
 - React + Vite
 - TailwindCSS

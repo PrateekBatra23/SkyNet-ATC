@@ -43,7 +43,7 @@ function FlightForm({ onFlightAdded }: Props) {
     try {
       setSubmitting(true);
       
-      // Convert arrivalTime to ISO format for scheduledLanding
+      
       const flightData = {
         flightId: flight.flightId!,
         airline: flight.airline!,
@@ -54,7 +54,7 @@ function FlightForm({ onFlightAdded }: Props) {
       await addFlight(flightData as any);
       alert("Flight added successfully!");
       
-      // Reset form
+    
       setFlight({
         flightId: "",
         airline: "",
@@ -63,7 +63,7 @@ function FlightForm({ onFlightAdded }: Props) {
         status: "scheduled" as any,
       });
       
-      // Notify parent to reload flights
+     
       onFlightAdded?.();
     } catch (error) {
       console.error("Failed to add flight:", error);

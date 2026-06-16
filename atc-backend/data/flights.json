@@ -35,5 +35,17 @@
     "airline": "IndiGo",
     "priority": "high",
     "scheduledLanding": "2025-09-18T09:03:00.000Z"
+  },
+  {
+    "flightId": "AI-302",
+    "airline": "Air India",
+    "priority": "high",
+    "scheduledLanding": "2025-10-06T22:03:00.000Z"
+  },
+  {
+    "flightId": "6E0023",
+    "airline": "IndiGo",
+    "priority": "high",
+    "scheduledLanding": "2026-06-10T11:55:00.000Z"
   }
 ]

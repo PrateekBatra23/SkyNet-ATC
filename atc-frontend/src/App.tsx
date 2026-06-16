@@ -15,7 +15,6 @@ function App() {
   const [summaryData, setSummaryData] = useState<FlightSummary[]>([]);
 
 
-  // Load flights and summary on mount
   useEffect(() => {
     loadFlights();
     loadSummary();
@@ -35,7 +34,7 @@ function App() {
       const response = await getLatestSummary();
       const backendSummary: BackendSummary = response.data;
       
-      // Convert backend format to frontend format
+     
       const formattedSummary: FlightSummary[] = backendSummary.flights.map((flight: BackendFlightRecord) => {
         const touchdown = new Date(flight.touchdown);
         const departure = new Date(flight.departureTime);
@@ -60,21 +59,20 @@ function App() {
       setSummaryData(formattedSummary);
     } catch (error) {
       console.error("Failed to load summary:", error);
-      // Don't show error if no summary exists yet
+      
       setSummaryData([]);
     }
   };
 
   const handleFlightAdded = () => {
-    loadFlights(); // Reload flights after adding
+    loadFlights(); 
   };
 
   const handleSimulationStart = () => {
-    // Simulation started
+
   };
 
   const handleSimulationStop = () => {
-    // Reload summary after simulation stops
     setTimeout(() => {
       loadSummary();
     }, 1000);

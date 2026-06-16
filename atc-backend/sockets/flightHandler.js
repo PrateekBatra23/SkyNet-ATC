@@ -5,9 +5,6 @@ const { handlegate } = require("../phases/gatedock");
 const { handleTaxiwayIn, handleTaxiwayOut } = require("../phases/taxiway");
 const { handleTakeoff } = require("../phases/takeOff");
 
-
-
-
 async function handleFlight(flight, socket,flightDB) {
   const landingInfo =await handleLanding(flight, socket);
   const taxiwayIn=await handleTaxiwayIn(flight,socket);
