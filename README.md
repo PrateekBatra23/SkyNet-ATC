@@ -1,4 +1,4 @@
-# Air Traffic Control (ATC) Simulation
+# SkyNet - Air Traffic Control (ATC) Simulation
 
 ## Overview
 This project simulates an **Air Traffic Control (ATC)** system as a full-stack web application.  
