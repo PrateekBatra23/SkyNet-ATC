@@ -1,42 +1,26 @@
-/* ─── NAV SHELL ──────────────────────────────────────────── */
-
+/* ─── NAVBAR ─────────────────────────────────────────────── */
 .navbar {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: rgba(5, 12, 28, 0.92);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(56, 189, 248, 0.1);
-  padding: 0;
-  overflow: hidden;
+  z-index: 200;
+  background: rgba(1, 11, 26, 0.7);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
 }
-
-/* ─── RUNWAY GRID (decorative) ───────────────────────────── */
-
-.runwayGrid {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  pointer-events: none;
-  opacity: 0.022;
-}
-
-.runwayLine {
-  width: 100%;
-  height: 1px;
-  background: #38bdf8;
+.scrolled {
+  background: rgba(1, 11, 26, 0.92);
+  border-color: var(--border-dim);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.5), 0 0 0 1px var(--border-subtle);
 }
 
 /* ─── CONTAINER ──────────────────────────────────────────── */
-
 .container {
-  position: relative;
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 32px;
-  height: 58px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -44,44 +28,28 @@
 }
 
 /* ─── BRAND ──────────────────────────────────────────────── */
-
 .brand {
   display: flex;
   align-items: center;
   gap: 12px;
-  text-decoration: none;
   flex-shrink: 0;
+  cursor: none;
 }
-
-/* Logo mark: concentric ring + center dot */
 
 .logoMark {
-  position: relative;
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
+  color: var(--cyan-bright);
   flex-shrink: 0;
 }
-
-.logoRing {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 1.5px solid rgba(56, 189, 248, 0.45);
-  animation: radarSpin 6s linear infinite;
+.logoSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
-
-.logoDot {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #38bdf8;
-  box-shadow:
-    0 0 8px rgba(56, 189, 248, 0.8),
-    0 0 18px rgba(56, 189, 248, 0.3);
+.logoRingOuter {
+  animation: logoSpin 10s linear infinite;
+  transform-origin: 16px 16px;
 }
 
 .brandText {
@@ -89,34 +57,59 @@
   flex-direction: column;
   gap: 1px;
 }
-
 .brandName {
-  font-size: 1rem;
-  font-weight: 800;
-  color: #f1f5f9;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
   letter-spacing: -0.02em;
   line-height: 1;
 }
-
+.brandAccent {
+  color: var(--cyan-bright);
+}
 .brandSub {
-  font-size: 0.55rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: #1e3a5f;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
   text-transform: uppercase;
   line-height: 1;
 }
 
-/* ─── RIGHT CLUSTER ──────────────────────────────────────── */
+/* ─── CENTER CLOCK ───────────────────────────────────────── */
+.centerCluster {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.clockLabel {
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+.clock {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.06em;
+  transition: color 0.3s;
+}
+.scrolled .clock {
+  color: var(--cyan-bright);
+}
 
+/* ─── RIGHT CLUSTER ──────────────────────────────────────── */
 .right {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
+  flex-shrink: 0;
 }
-
-/* ─── LIVE STATS ─────────────────────────────────────────── */
 
 .stat {
   display: flex;
@@ -124,113 +117,102 @@
   align-items: flex-end;
   gap: 1px;
 }
-
 .statNum {
-  font-size: 0.9rem;
-  font-weight: 800;
-  color: #38bdf8;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--cyan-bright);
   line-height: 1;
-  font-family: 'Courier New', monospace;
   letter-spacing: -0.02em;
 }
-
+.statGreen { color: var(--emerald); }
 .statLabel {
-  font-size: 0.52rem;
+  font-family: var(--font-mono);
+  font-size: 0.48rem;
   font-weight: 600;
   letter-spacing: 0.12em;
-  color: #1e3a5f;
-  font-family: 'Courier New', monospace;
+  color: var(--text-dim);
   text-transform: uppercase;
 }
 
-/* ─── VERTICAL DIVIDER ───────────────────────────────────── */
-
 .divider {
   width: 1px;
-  height: 28px;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(56, 189, 248, 0.15),
-    transparent
-  );
+  height: 24px;
+  background: linear-gradient(to bottom, transparent, var(--border-dim), transparent);
   flex-shrink: 0;
 }
-
-/* ─── SYSTEM STATUS ──────────────────────────────────────── */
 
 .systemStatus {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
   padding: 5px 12px;
-  border-radius: 3px;
-  border: 1px solid rgba(56, 189, 248, 0.2);
-  background: rgba(56, 189, 248, 0.05);
+  border-radius: 2px;
+  border: 1px solid rgba(16,185,129,0.25);
+  background: rgba(16,185,129,0.06);
+  transition: border-color 0.3s, background 0.3s;
 }
-
+.systemStatus:hover {
+  border-color: rgba(16,185,129,0.5);
+  background: rgba(16,185,129,0.1);
+}
 .statusDot {
   display: block;
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #38bdf8;
+  background: var(--emerald);
+  box-shadow: 0 0 6px var(--emerald);
   flex-shrink: 0;
-  animation: statusPulse 2s ease-in-out infinite;
+  animation: statusPulse 2.2s ease-in-out infinite;
 }
-
 .statusText {
+  font-family: var(--font-mono);
   font-size: 0.58rem;
   font-weight: 700;
   letter-spacing: 0.16em;
-  color: #38bdf8;
-  font-family: 'Courier New', monospace;
+  color: var(--emerald);
+}
+
+/* ─── PROGRESS LINE ──────────────────────────────────────── */
+.progressLine {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent 0%, var(--cyan-bright) 50%, transparent 100%);
+  opacity: 0.15;
+}
+.scrolled .progressLine {
+  opacity: 0.3;
+  animation: lineGlow 3s ease-in-out infinite;
 }
 
 /* ─── KEYFRAMES ──────────────────────────────────────────── */
-
-@keyframes radarSpin {
-  0%   { transform: rotate(0deg) scaleX(1); opacity: 0.45; }
-  25%  { transform: rotate(90deg) scaleX(0.7); opacity: 0.2; }
-  50%  { transform: rotate(180deg) scaleX(1); opacity: 0.45; }
-  75%  { transform: rotate(270deg) scaleX(0.7); opacity: 0.2; }
-  100% { transform: rotate(360deg) scaleX(1); opacity: 0.45; }
+@keyframes logoSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
-
 @keyframes statusPulse {
-  0%, 100% { opacity: 0.5; transform: scale(0.85); }
-  50%       { opacity: 1;   transform: scale(1.2);  }
+  0%, 100% { opacity: 0.5; transform: scale(0.9); }
+  50%       { opacity: 1;   transform: scale(1.2); }
+}
+@keyframes lineGlow {
+  0%, 100% { opacity: 0.2; }
+  50%       { opacity: 0.5; }
 }
 
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
-
-@media (max-width: 768px) {
-  .container {
-    padding: 0 20px;
-    height: 52px;
-  }
-
-  /* Hide stats on mobile, keep brand + status */
-  .stat,
-  .divider {
-    display: none;
-  }
-
-  .brandSub {
-    display: none;
-  }
-
-  .right {
-    gap: 12px;
-  }
+@media (max-width: 900px) {
+  .container { padding: 0 20px; }
+  .centerCluster { display: none; }
+  .stat, .divider { display: none; }
+  .brandSub { display: none; }
 }
-
 @media (max-width: 480px) {
-  .statusText {
-    display: none;
-  }
-
-  .systemStatus {
-    padding: 5px 8px;
-  }
+  .container { height: 54px; }
+  .statusText { display: none; }
+  .systemStatus { padding: 5px 8px; }
+  .brandName { font-size: 0.95rem; }
 }

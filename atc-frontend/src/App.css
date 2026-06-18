@@ -1,12 +1,173 @@
-.app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+ 
+/* ─── TOKENS ─────────────────────────────────────────────── */
+:root {
+  /* Core palette */
+  --bg-deep:       #010b1a;
+  --bg-base:       #020d20;
+  --bg-surface:    #06142b;
+  --bg-elevated:   #0a1c38;
+  --bg-card:       rgba(6, 18, 38, 0.85);
+ 
+  /* Cyan primary */
+  --cyan-bright:   #00d4ff;
+  --cyan-mid:      #22d3ee;
+  --cyan-dim:      #0ea5e9;
+  --cyan-ghost:    rgba(0, 212, 255, 0.08);
+  --cyan-border:   rgba(0, 212, 255, 0.2);
+ 
+  /* Accent / state colors */
+  --amber:         #f59e0b;
+  --amber-ghost:   rgba(245, 158, 11, 0.1);
+  --crimson:       #ef4444;
+  --crimson-ghost: rgba(239, 68, 68, 0.1);
+  --emerald:       #10b981;
+  --emerald-ghost: rgba(16, 185, 129, 0.1);
+  --violet:        #818cf8;
+ 
+  /* Text */
+  --text-primary:  #f0f6ff;
+  --text-secondary: #94a3b8;
+  --text-muted:    #3d5a7a;
+  --text-dim:      #1e3a5f;
+ 
+  /* Borders */
+  --border-subtle: rgba(0, 212, 255, 0.08);
+  --border-dim:    rgba(0, 212, 255, 0.15);
+  --border-mid:    rgba(0, 212, 255, 0.25);
+ 
+  /* Typography */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+ 
+  /* Shadows */
+  --shadow-card:   0 4px 24px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border-subtle);
+  --shadow-glow:   0 0 24px rgba(0, 212, 255, 0.15);
+  --shadow-glow-lg: 0 0 60px rgba(0, 212, 255, 0.12);
+ 
+  /* Easing */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-
-main {
-  flex: 1;
-  padding: 20px;
-  display: grid;
-  gap: 20px;
+ 
+/* ─── RESET & BASE ───────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+ 
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+ 
+body {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: none; /* custom cursor */
+}
+ 
+/* Restore default cursor on touch devices */
+@media (hover: none) {
+  body { cursor: auto; }
+  #custom-cursor { display: none !important; }
+}
+ 
+/* ─── CUSTOM CURSOR ──────────────────────────────────────── */
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  mix-blend-mode: screen;
+}
+ 
+#cursor-ring {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--cyan-bright);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s var(--ease-out-quart),
+              height 0.25s var(--ease-out-quart),
+              opacity 0.25s;
+  opacity: 0.7;
+}
+ 
+#cursor-dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: var(--cyan-bright);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 8px var(--cyan-bright);
+}
+ 
+body.cursor-hover #cursor-ring {
+  width: 56px;
+  height: 56px;
+  opacity: 0.4;
+  border-color: var(--cyan-bright);
+}
+ 
+body.cursor-click #cursor-ring {
+  width: 24px;
+  height: 24px;
+  opacity: 1;
+}
+ 
+/* ─── PARTICLE CANVAS ────────────────────────────────────── */
+#particle-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+}
+ 
+/* ─── SCROLLBAR ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 255, 0.2);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(0, 212, 255, 0.4); }
+ 
+/* ─── SELECTION ──────────────────────────────────────────── */
+::selection {
+  background: rgba(0, 212, 255, 0.25);
+  color: var(--text-primary);
+}
+ 
+/* ─── LAYOUT UTILITIES ───────────────────────────────────── */
+.simulation-layout {
+  position: relative;
+  min-height: 100vh;
+  z-index: 1;
+}
+ 
+/* ─── FOCUS ──────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--cyan-bright);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+ 
+/* ─── REDUCED MOTION ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

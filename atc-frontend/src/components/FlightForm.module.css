@@ -1,225 +1,152 @@
 /* ─── FORM PANEL ─────────────────────────────────────────── */
-
 .form {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(
-    135deg,
-    rgba(8, 18, 38, 0.92) 0%,
-    rgba(10, 22, 48, 0.88) 100%
-  );
-  border: 1px solid rgba(56, 189, 248, 0.1);
-  border-radius: 6px;
-  padding: 28px 32px 26px;
-  margin-bottom: 24px;
-  box-shadow:
-    0 1px 0 rgba(56, 189, 248, 0.06) inset,
-    0 24px 48px rgba(0, 0, 0, 0.45);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 26px 28px 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s var(--ease-out-quart) 0.1s, transform 0.6s var(--ease-out-quart) 0.1s;
 }
-
-/* ─── AMBIENT GLOW ───────────────────────────────────────── */
+.formVisible { opacity: 1; transform: translateY(0); }
 
 .glowOrb {
   position: absolute;
-  top: -100px;
-  right: -80px;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(
-    circle,
-    rgba(56, 189, 248, 0.06) 0%,
-    transparent 65%
-  );
+  top: -80px; right: -60px;
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, rgba(0,212,255,0.05) 0%, transparent 65%);
   pointer-events: none;
 }
 
 /* ─── HEADER ─────────────────────────────────────────────── */
-
-.formHeader {
-  margin-bottom: 24px;
-}
-
+.formHeader { margin-bottom: 22px; }
 .eyebrow {
   display: block;
-  font-size: 0.62rem;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
   font-weight: 700;
   letter-spacing: 0.22em;
-  color: #38bdf8;
-  margin-bottom: 6px;
-  font-family: 'Courier New', monospace;
+  color: var(--cyan-bright);
+  margin-bottom: 5px;
 }
-
 .formTitle {
   margin: 0;
-  font-size: 1.45rem;
-  font-weight: 800;
-  color: #f1f5f9;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
   letter-spacing: -0.025em;
 }
 
-/* ─── FIELDS GRID ────────────────────────────────────────── */
-
+/* ─── GRID ───────────────────────────────────────────────── */
 .fieldsGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px 20px;
-  margin-bottom: 22px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 18px;
+  margin-bottom: 20px;
 }
 
 /* ─── FIELD ──────────────────────────────────────────────── */
-
 .field {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 6px;
 }
 
 /* ─── LABEL ──────────────────────────────────────────────── */
-
 .fieldLabel {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
+  font-family: var(--font-mono);
   font-size: 0.6rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
-  color: #334155;
-  font-family: 'Courier New', monospace;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
   cursor: default;
   transition: color 0.2s;
 }
-
-.field:focus-within .fieldLabel {
-  color: #38bdf8;
-}
-
-.labelDot {
+.field:focus-within .fieldLabel { color: var(--cyan-bright); }
+.labelLine {
   display: block;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #1e293b;
+  width: 12px;
+  height: 1px;
+  background: currentColor;
   flex-shrink: 0;
-  transition: background 0.2s;
-}
-
-.field:focus-within .labelDot {
-  background: #38bdf8;
+  opacity: 0.6;
 }
 
 /* ─── INPUT / SELECT ─────────────────────────────────────── */
-
 .field input,
 .field select {
-  height: 44px;
+  height: 42px;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  background: rgba(6, 12, 26, 0.7);
-  color: #e2e8f0;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(4,10,24,0.7);
+  color: var(--text-primary);
   padding: 0 14px;
-  font-size: 0.85rem;
-  font-family: 'Courier New', monospace;
+  font-size: 0.84rem;
+  font-family: var(--font-mono);
   font-weight: 500;
-  transition:
-    border-color 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
   width: 100%;
   box-sizing: border-box;
   -webkit-appearance: none;
   appearance: none;
 }
-
-.field input::placeholder {
-  color: #1e3a5f;
-  font-style: normal;
-}
-
+.field input::placeholder { color: var(--text-dim); }
 .field input:focus,
 .field select:focus {
   outline: none;
-  border-color: rgba(56, 189, 248, 0.45);
-  background: rgba(56, 189, 248, 0.04);
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.07);
+  border-color: rgba(0,212,255,0.4);
+  background: rgba(0,212,255,0.03);
+  box-shadow: 0 0 0 3px rgba(0,212,255,0.06);
 }
 
 /* Error state */
+.fieldError input { border-color: rgba(239,68,68,0.35); background: rgba(239,68,68,0.03); }
+.fieldError input:focus { border-color: rgba(239,68,68,0.6); box-shadow: 0 0 0 3px rgba(239,68,68,0.06); }
 
-.fieldError .field input,
-.fieldError input {
-  border-color: rgba(239, 68, 68, 0.4);
-  background: rgba(239, 68, 68, 0.03);
-}
-
-.fieldError input:focus {
-  border-color: rgba(239, 68, 68, 0.6);
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.07);
-}
-
-/* ─── DATETIME PICKER ────────────────────────────────────── */
-
+/* Date picker */
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   filter: invert(0.3) sepia(1) saturate(2) hue-rotate(180deg);
   cursor: pointer;
-  opacity: 0.6;
+  opacity: 0.5;
   transition: opacity 0.2s;
 }
-
-input[type="datetime-local"]:hover::-webkit-calendar-picker-indicator {
-  opacity: 1;
-}
+input[type="datetime-local"]:hover::-webkit-calendar-picker-indicator { opacity: 1; }
 
 /* ─── SELECT WRAP ────────────────────────────────────────── */
-
-.selectWrap {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.selectWrap select {
-  padding-right: 34px;
-  cursor: pointer;
-}
-
-.selectArrow {
+.selectWrap { position: relative; }
+.selectWrap select { padding-right: 36px; cursor: none; }
+.selectChevron {
   position: absolute;
   right: 12px;
-  font-size: 0.75rem;
-  color: #334155;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
   pointer-events: none;
-  transition: color 0.2s;
-  line-height: 1;
+  transition: color 0.2s, transform 0.2s;
 }
+.field:focus-within .selectChevron { color: var(--cyan-bright); }
+.field select option { background: var(--bg-surface); color: var(--text-primary); }
 
-.field:focus-within .selectArrow {
-  color: #38bdf8;
-}
-
-.field select option {
-  background: #0a1628;
-  color: #e2e8f0;
-}
-
-/* ─── ERROR MESSAGE ──────────────────────────────────────── */
-
+/* ─── ERROR MSG ──────────────────────────────────────────── */
 .error {
   margin: 0;
-  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
   font-weight: 600;
   color: #f87171;
-  font-family: 'Courier New', monospace;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
 }
 
 /* ─── ACTIONS ────────────────────────────────────────────── */
-
-.actions {
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* ─── SUBMIT BUTTON ──────────────────────────────────────── */
+.actions { display: flex; justify-content: flex-end; }
 
 .actions button {
   position: relative;
@@ -227,112 +154,87 @@ input[type="datetime-local"]:hover::-webkit-calendar-picker-indicator {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 0 28px;
-  height: 42px;
-  border: 1px solid transparent;
+  padding: 0 24px;
+  height: 40px;
+  border: 1px solid var(--cyan-border);
   border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  font-family: 'Courier New', monospace;
-  color: #ffffff;
-  background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
-  box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.15),
-    0 3px 10px rgba(37, 99, 235, 0.18);
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    background 0.25s ease;
+  cursor: none;
+  background: transparent;
+  color: var(--text-primary);
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s var(--ease-spring), background 0.25s;
 }
+.btnContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.btnPlusIcon, .btnCheckIcon {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--cyan-bright);
+}
+.btnCheckIcon { color: var(--emerald); }
 
-.actions button::after {
+.actions button::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    105deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.12) 50%,
-    transparent 70%
-  );
-  transform: translateX(-100%);
-  transition: transform 0.5s ease;
+  background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(37,99,235,0.08));
+  opacity: 0;
+  transition: opacity 0.3s;
 }
-
-.actions button:not(:disabled):hover::after {
-  transform: translateX(100%);
-}
-
 .actions button:not(:disabled):hover {
+  border-color: var(--cyan-bright);
+  box-shadow: 0 0 20px rgba(0,212,255,0.15);
   transform: translateY(-2px);
-  box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.28),
-    0 6px 16px rgba(37, 99, 235, 0.28);
 }
-
-.actions button:not(:disabled):active {
-  transform: translateY(0);
-  box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.25),
-    0 2px 6px rgba(37, 99, 235, 0.25);
-}
-
-.actions button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
+.actions button:not(:disabled):hover::before { opacity: 1; }
+.actions button:not(:disabled):active { transform: translateY(0); }
+.actions button:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
 
 /* Success state */
-
-.actions button.btnSuccess {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  box-shadow:
-    0 0 0 1px rgba(16, 185, 129, 0.15),
-    0 3px 10px rgba(5, 150, 105, 0.18);
+.btnSuccess {
+  border-color: rgba(16,185,129,0.4) !important;
+}
+.btnSuccess::before {
+  background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(5,150,105,0.08)) !important;
+  opacity: 1 !important;
 }
 
-/* ─── SPINNER ────────────────────────────────────────────── */
+/* Shimmer */
+.btnShimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.06) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+}
+.actions button:not(:disabled):hover .btnShimmer { transform: translateX(100%); }
 
+/* ─── SPINNER ────────────────────────────────────────────── */
 .spinner {
   display: inline-block;
   width: 10px;
   height: 10px;
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
-  border-top-color: #ffffff;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-top-color: var(--cyan-bright);
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
-  flex-shrink: 0;
 }
 
 /* ─── KEYFRAMES ──────────────────────────────────────────── */
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
-
-@media (max-width: 900px) {
-  .fieldsGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 640px) {
-  .form {
-    padding: 22px 20px 20px;
-  }
-
-  .actions {
-    justify-content: stretch;
-  }
-
-  .actions button {
-    width: 100%;
-  }
+@media (max-width: 860px) { .fieldsGrid { grid-template-columns: 1fr; } }
+@media (max-width: 600px) {
+  .form { padding: 20px 18px 18px; }
+  .actions { justify-content: stretch; }
+  .actions button { width: 100%; }
 }
